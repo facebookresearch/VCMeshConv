@@ -26,6 +26,11 @@ Facebook has a [bounty program](https://www.facebook.com/whitehat/) for the safe
 disclosure of security bugs. In those cases, please go through the process
 outlined on that page and do not file a public issue.
 
+## Coding Style
+* 4 spaces for indentation rather than tabs
+* 80 character line length
+* in general, please maintain a consistent style with the rest of the code
+
 ## License
 By contributing to VCMeshConv, you agree that your contributions will be licensed
 under the LICENSE file in the root directory of this source tree.

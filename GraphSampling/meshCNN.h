@@ -1,6 +1,10 @@
-//
-// Created by zhouyi on 6/14/19.
-//
+/*
+Copyright (c) Facebook, Inc. and its affiliates.
+All rights reserved.
+
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+*/
 
 #ifndef POINTSAMPLING_MESHCNN_H
 #define POINTSAMPLING_MESHCNN_H
@@ -8,7 +12,7 @@
 #endif //POINTSAMPLING_MESHCNN_H
 
 #include "meshPooler.h"
-#include "cnpy/cnpy.h"
+#include "third-party/cnpy/cnpy.h"
 
 
 //gives you an fully convolutional auto-encoder. The pooling and unpooling strides are symmetric.

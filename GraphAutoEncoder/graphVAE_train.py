@@ -1,9 +1,11 @@
-# -*- coding: utf-8 -*-
 """
-Spyder Editor
+Copyright (c) Facebook, Inc. and its affiliates.
+All rights reserved.
 
-This is a temporary script file.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
 """
+
 import itertools
 
 import os

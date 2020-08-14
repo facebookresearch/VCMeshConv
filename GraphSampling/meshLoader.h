@@ -1,6 +1,10 @@
-//
-// Created by zhouyi on 6/12/19.
-//
+/*
+Copyright (c) Facebook, Inc. and its affiliates.
+All rights reserved.
+
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+*/
 
 #ifndef POINTSAMPLING_MESHLOADER_H
 #define POINTSAMPLING_MESHLOADER_H
@@ -22,8 +26,8 @@
 #include <vector>
 
 
-#include "mdVector.h"
-#include "mdSArray.h"
+#include "third-party/mdVector.h"
+#include "third-party/mdSArray.h"
 
 using namespace std;
 

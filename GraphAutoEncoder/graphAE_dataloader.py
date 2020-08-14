@@ -1,3 +1,11 @@
+"""
+Copyright (c) Facebook, Inc. and its affiliates.
+All rights reserved.
+
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+"""
+
 import numpy as np
 import os
 from plyfile import PlyData, PlyElement
@@ -7,7 +15,7 @@ import torch
 import transforms3d.euler as euler
 from os import mkdir
 from os.path import join, exists
-import h5py
+
 
 
 SCALE = 1
@@ -24,37 +32,19 @@ def get_ply_fn_lst(folder_lst):
 
 
 
-"""
-def get_pc_from_ply_fn_normalized(ply_fn):
-    pc = get_pc_from_ply_fn(ply_fn)
-    
-    #pc = (pc-pc_mean)/pc_std
-    
-    return pc
-"""
-
 #pc p_num*3 np
 def get_augmented_pc(pc):
     size= pc.shape[0]
-
-    #scale = np.random.rand()*0.2+0.9 #scale 0.9 to 1.1
-    #new_pc = pc*scale
-
     new_pc = pc
-
-    #axis = np.array([0,1,0])
-    axis = np.random.rand(3)
-    axis = axis / np.sqrt(pow(axis,2).sum())
     
-    #theta=(np.random.randint(0,30)-15)/180.0*np.pi
+    axis = np.random.rand(3)
+    axis = axis / np.sqrt(pow(axis,2).sum())    
+    
     theta= (np.random.rand()-0.5)*np.pi*2
     
     Rorgmat = euler.axangle2mat(axis,theta)
-    R = Rorgmat.reshape((1,3,3)).repeat(size,0)
-    #T = np.random.randn(1,3,1)/50
-    Torg = (np.random.rand(1,3,1)-0.5)*0.2 #-10cm to 10cm
-    #T[:,1,:]=T[:,1,:]*0
-    #T[:,1] = T[:,1]*0
+    R = Rorgmat.reshape((1,3,3)).repeat(size,0)    
+    Torg = (np.random.rand(1,3,1)-0.5)*0.2 #-10cm to 10cm    
     T=Torg.repeat(size,0)
     
     new_pc = np.matmul(R, new_pc.reshape((size,3,1))) +T
@@ -63,25 +53,16 @@ def get_augmented_pc(pc):
 
 def get_augmented_pc_ret(pc):
     size= pc.shape[0]
-
-    #scale = np.random.rand()*0.2+0.9 #scale 0.9 to 1.1
-    #new_pc = pc*scale
-
     new_pc = pc
 
-    #axis = np.array([0,1,0])
     axis = np.random.rand(3)
     axis = axis / np.sqrt(pow(axis,2).sum())
     
-    #theta=(np.random.randint(0,30)-15)/180.0*np.pi
     theta= (np.random.rand()-0.5)*np.pi*2
     
     Rorgmat = euler.axangle2mat(axis,theta)
     R = Rorgmat.reshape((1,3,3)).repeat(size,0)
-    #T = np.random.randn(1,3,1)/50
     Torg = (np.random.rand(1,3,1)-0.5)*0.2 #-10cm to 10cm
-    #T[:,1,:]=T[:,1,:]*0
-    #T[:,1] = T[:,1]*0
     T=Torg.repeat(size,0)
     
     new_pc = np.matmul(R, new_pc.reshape((size,3,1))) +T
@@ -97,12 +78,7 @@ def get_random_pc_batch_from_ply_fn_lst_torch(ply_fn_lst , batch, augmented=Fals
     for b in range(batch):
         index = np.random.randint(0, len(ply_fn_lst))
         ply_fn_batch+=[ply_fn_lst[index]]
-    
-    #index = np.random.randint(0,len(ply_fn_lst)-batch)
-    #ply_fn_batch =ply_fn_lst[index:index+batch]
-    #pool = ThreadPool(min(batch,60)) 
-    #pc_batch = pool.map(get_pc_from_ply_fn, ply_fn_batch)
-    
+      
     pc_batch=[]
     for ply_fn in ply_fn_batch:
         pc = get_pc_from_ply_fn(ply_fn)
@@ -300,37 +276,4 @@ def get_pcs_from_ply_folder(ply_folder):
     pcs = np.array(pcs)
     
     return pcs
-    
-#transform_plys_to_npy("/diskb/body/data/yaser_7k/Pass1_Meshes_train", "/diskb/body/data/yaser_7k/Pass1_Meshes_train/pcs")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

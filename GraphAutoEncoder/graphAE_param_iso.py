@@ -47,10 +47,6 @@ class Parameters():
         self.w_w_weights_l1 = float(config.get("Params","w_w_weights_l1" ))
 
 
-        self.pcs_train = config.get("Params", "pcs_train")
-        self.pcs_evaluate = config.get("Params", "pcs_evaluate")
-        self.pcs_mean = config.get("Params", "pcs_mean")
-
         self.mesh_train = config.get("Params", "mesh_train")
 
         self.point_num = int(config.get("Params", "point_num"))

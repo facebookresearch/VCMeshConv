@@ -16,6 +16,7 @@ LICENSE file in the root directory of this source tree.
 #include <list>
 #include "set"
 #include <math.h>
+#include <ctime>
 
 
 
@@ -63,20 +64,16 @@ public:
     }
 
     void set_must_include_center_lst_from_mesh(const Mesh & mesh){
-        cout<<"Start setting must_include_center_lst from mesh (the red points)\n";
+        cout<<"Start setting must_include_center_lst from mesh\n";
         _must_include_center_lst.clear();
 
         int point_num = mesh.colors.size();
 
-        for(int i =0; i< point_num; i++)
-        {
-            Vec3<float> c = mesh.colors[i];
-            if((c[0]==0) && (c[1]==1) && (c[2]==0))
-            {
-                _must_include_center_lst.push_back(i);
-            }
-
-        }
+        auto time = std::time(nullptr);
+        // Put here some points which do you want to check
+        _must_include_center_lst.push_back(time % mesh.points.size());
+        _must_include_center_lst.push_back((time + 1000) % mesh.points.size());
+        _must_include_center_lst.push_back((time - 1000) % mesh.points.size());
     }
 
     bool is_connection_map_good()

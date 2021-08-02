@@ -104,14 +104,19 @@ public:
             int after_pool_size = (_meshPoolers[i]._center_center_map.size());
             int before_pool_size = (_meshPoolers[i]._connection_map.size());
 
+            // Check to avoid zero-division
+            if ((after_pool_size == 0) || (before_pool_size == 0)) {
+                break;
+            }
+
             vector<int> pool_neighborID_lst_lst = get_neighborID_lst_lst(_meshPoolers[i]._pool_map, before_pool_size);
 
             vector<int> unpool_neighborID_lst_lst = get_neighborID_lst_lst(_meshPoolers[i]._unpool_map, after_pool_size);
 
 
             cout<<"save pool "<<to_string(i)<<".\n";
-            int neighbor_num_pool_2 = pool_neighborID_lst_lst.size()/after_pool_size-1;
-            
+            int neighbor_num_pool_2 =
+                (pool_neighborID_lst_lst.size() / after_pool_size) - 1;
             std::vector<size_t > shape_info = {(size_t)after_pool_size, (size_t)(1+neighbor_num_pool_2) };
             cout<<shape_info[0]<<" "<<shape_info[1]<<"\n";
             //cout<< pool_neighborID_lst_lst.size()<<"\n";
@@ -122,7 +127,9 @@ public:
 
 
             cout<<"save unpool "<<to_string(i)<<".\n";
-            int neighbor_num_unpool_2 = unpool_neighborID_lst_lst.size()/before_pool_size-1;
+            int neighbor_num_unpool_2 = (
+                unpool_neighborID_lst_lst.size() / before_pool_size) - 1;
+
             shape_info = {(size_t)before_pool_size, (size_t)(1+neighbor_num_unpool_2) };
             cout<<shape_info[0]<<" "<<shape_info[1]<<"\n";
 
